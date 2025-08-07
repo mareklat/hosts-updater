@@ -5,6 +5,9 @@ on:
     tags:
       - '*'
 
+permissions:
+  contents: write
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -34,7 +37,8 @@ jobs:
           cp -f dist/hosts_updater build/  # Force copy
 
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: |
-            build/*
+          artifacts: "build/*"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
