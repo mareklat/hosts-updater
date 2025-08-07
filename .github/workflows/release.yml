@@ -30,7 +30,8 @@ jobs:
           fi
           ./build.sh
           mkdir -p build
-          cp dist/hosts_updater build/
+          rm -rf build/hosts_updater  # Remove if exists as directory
+          cp -f dist/hosts_updater build/  # Force copy
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
