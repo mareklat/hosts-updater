@@ -19,8 +19,14 @@ jobs:
       - name: Make build directory
         run: mkdir -p build
 
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
       - name: Build binary
-        run: ./build.sh
+        run: |
+          ./build.sh
+          mkdir -p build
+          cp dist/hosts_updater build/
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
