@@ -24,6 +24,10 @@ jobs:
 
       - name: Build binary
         run: |
+          # Generate spec file if it doesn't exist
+          if [ ! -f "hosts_updater.spec" ]; then
+            pyinstaller --onefile hosts_updater.py --specpath .
+          fi
           ./build.sh
           mkdir -p build
           cp dist/hosts_updater build/
